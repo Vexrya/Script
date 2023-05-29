@@ -1,4 +1,6 @@
 return {
+  ["fire"] = "🔥",
+  ["skull"] = "💀",
   ["hatchingchick"] = "🐣",
   ["egg"] = "🥚",
   ["hammer"] = "🔨",
@@ -17,5 +19,8 @@ return {
   ["run"] = "🏃",
   ["jump"] = "🦘",
   ["star2"] = "🌟",
-  ["eggshell"] = "🐚";
+  ["eggshell"] = "🐚",
+  ["box"] = "📦";
+  
+  
 }
