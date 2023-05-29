@@ -1,5 +1,7 @@
 return {
   ["fire"] = "🔥",
+  ["double-sword"] = "⚔️ ",
+  ["wave"] = "🌊",
   ["skull"] = "💀",
   ["hatchingchick"] = "🐣",
   ["egg"] = "🥚",
