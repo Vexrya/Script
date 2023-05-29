@@ -1,5 +1,6 @@
 return {
   ["fire"] = "🔥",
+  ["verified"] = "☑️",
   ["doublesword"] = "⚔️",
   ["wave"] = "🌊",
   ["skull"] = "💀",
