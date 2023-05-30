@@ -1,7 +1,9 @@
-local StarterGui = game:GetService("StarterGui")
-local Link = game:HttpGet("https://raw.githubusercontent.com/Odrexyo/Script/main/XeyHub/Games/..game.PlaceId..".lua")
+local NotificationLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/lobox920/Notification-Library/main/Library.lua"))()
 
-if Link then
+
+local Link = game:HttpGet("https://raw.githubusercontent.com/Odrexyo/Script/main/XeyHub/Games/"..game.PlaceId..".lua")
+
+if Link then	
   StarterGui:SetCore("SendNotification", {
 		Title = "XeyHub X Notification",
 		Text = "Welcome. Loading script.",
