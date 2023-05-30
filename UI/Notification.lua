@@ -1,72 +1,65 @@
-local LibraryName = "Notification Library"
 local NotificationLibrary = {}
-local TweenService = game:GetService("TweenService")
-local CoreGui = game:GetService("CoreGui")
-local library
-local templateFolder
-local canvas
 
-function NotificationLibrary:Load()
-    library = game:GetObjects("rbxassetid://12149165324")[1]
-    templateFolder = library.Templates
-    canvas = library.list
-    library.Name = LibraryName
-    library.Parent = CoreGui
-end
+local NotificationTemplate = Instance.new("ScreenGui")
+NotificationTemplate.Name = "NotificationTemplate"
+NotificationTemplate.IgnoreGuiInset = true
+NotificationTemplate.ResetOnSpawn = false
 
-function NotificationLibrary:Notify(config)
-    local libaryCore = CoreGui:FindFirstChild(LibraryName)
-    if not CoreGui:FindFirstChild(LibraryName) then
-        NotificationLibrary:Load()
-    else
-        library = libaryCore
-        templateFolder = library.Templates
-        canvas = library.list
-    end
+local NotificationFrame = Instance.new("Frame")
+NotificationFrame.Name = "NotificationFrame"
+NotificationFrame.BackgroundTransparency = 0.9
+NotificationFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+NotificationFrame.BorderColor3 = Color3.fromRGB(20, 20, 20)
+NotificationFrame.BorderSizePixel = 1
+NotificationFrame.Position = UDim2.new(1, -320, 0, 20)
+NotificationFrame.Size = UDim2.new(0, 300, 0, 80)
 
-    local title = config.Title or ""
-    local content = config.Content or ""
-    local duration = config.Duration or 5
+local TitleLabel = Instance.new("TextLabel")
+TitleLabel.Name = "TitleLabel"
+TitleLabel.BackgroundTransparency = 1
+TitleLabel.Position = UDim2.new(0, 10, 0, 10)
+TitleLabel.Size = UDim2.new(1, -20, 0, 25)
+TitleLabel.Font = Enum.Font.SourceSansBold
+TitleLabel.Text = ""
+TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleLabel.TextSize = 18
+TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-    task.spawn(function()
-        local success, err = pcall(function()
-            local Notification = templateFolder:WaitForChild("Default"):Clone()
-            local filler = Notification.Filler
-            local bar = Notification.bar
+local TextLabel = Instance.new("TextLabel")
+TextLabel.Name = "TextLabel"
+TextLabel.BackgroundTransparency = 1
+TextLabel.Position = UDim2.new(0, 10, 0, 40)
+TextLabel.Size = UDim2.new(1, -20, 1, -50)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = ""
+TextLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+TextLabel.TextSize = 16
+TextLabel.TextWrapped = true
 
-            Notification.Header.Text = title
-            Notification.Content.Text = content
+NotificationFrame.Parent = NotificationTemplate
+TitleLabel.Parent = NotificationFrame
+TextLabel.Parent = NotificationFrame
 
-            Notification.Visible = true
-            Notification.Parent = canvas
+function NotificationLibrary:CreateNotification(title, text, duration)
+	local notification = NotificationTemplate:Clone()
+	local frame = notification.NotificationFrame
+	local titleLabel = frame.TitleLabel
+	local textLabel = frame.TextLabel
 
-            Notification.Size = UDim2.new(0, 0, 0.087, 0)
-            filler.Size = UDim2.new(1, 0, 1, 0)
+	titleLabel.Text = title
+	textLabel.Text = text
 
-            local T1 = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-            local T2 = TweenInfo.new(duration, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
-            local T3 = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+	notification.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-            TweenService:Create(Notification, T1, {Size = UDim2.new(1, 0, 0.087, 0)}):Play()
-            task.wait(0.2)
-            TweenService:Create(filler, T3, {Size = UDim2.new(0.011, 0, 1, 0)}):Play()
+	frame:TweenPosition(UDim2.new(1, -320, 0, 20), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, 0.5, true)
 
-            TweenService:Create(bar, T2, {Size = UDim2.new(1, 0, 0.05, 0)}):Play()
+	wait(duration)
 
-            task.wait(duration)
+	frame:TweenPosition(UDim2.new(1, 10, 0, 20), Enum.EasingDirection.In, Enum.EasingStyle.Quart, 0.5, true)
 
-            TweenService:Create(filler, T1, {Size = UDim2.new(1, 0, 1, 0)}):Play()
-            task.wait(0.25)
-            TweenService:Create(Notification, T3, {Size = UDim2.new(0, 0, 0.087, 0)}):Play()
-            task.wait(0.25)
-            Notification:Destroy()
-        end)
+	wait(0.5)
 
-        if not success then
-            warn("There was an error while trying to create a notification!")
-            warn(err)
-        end
-    end)
+	notification:Destroy()
 end
 
 return NotificationLibrary
