@@ -1,5 +1,5 @@
 local StarterGui = game:GetService("StarterGui")
-local Link = game:HttpGet("https://raw.githubusercontent.com/Odrexyo/Script/XeyHub/Games/"..game.PlaceId..".lua")
+local Link = game:HttpGet("https://raw.githubusercontent.com/Odrexyo/Script/main/XeyHub/Games/..game.PlaceId..".lua")
 
 if Link then
   StarterGui:SetCore("SendNotification", {
