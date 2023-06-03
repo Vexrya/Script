@@ -1,5 +1,4 @@
-local NotificationLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/lobox920/Notification-Library/main/Library.lua"))()
-
+local StarterGui = game:GetService("StarterGui")
 
 local Link = game:HttpGet("https://raw.githubusercontent.com/Odrexyo/Script/main/XeyHub/Games/"..game.PlaceId..".lua")
 
