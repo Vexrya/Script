@@ -26,7 +26,7 @@ instances.Frame_1.Name = 'Main'
 
 instances.Frame_1.BackgroundColor3 = Color3.new(0.0666667, 0.0666667, 0.0666667)
 instances.Frame_1.BorderSizePixel = 0
-instances.Frame_1.Position = UDim2.new(1, -331, 1, -61)
+ instances.Frame_1.Position = UDim2.new(1, -331, 1, -61)
 instances.Frame_1.Size = UDim2.new(0, 331, 0, 61)
 
 instances.Frame_2.Parent = instances.Frame_1
@@ -99,7 +99,7 @@ function Code_LocalScript_1() --LocalScript
 	local script = instances.LocalScript_1
 
 	script.Parent.MouseButton1Down:Connect(function()
-	    script.Parent.Parent:TweenPosition(UDim2.new(1, -331, 1, 0), "InOut", "Sine", 7.2)
+	    script.Parent.Parent:TweenPosition(UDim2.new(50, 0,0,0),"InOut","Sine",7.2)
 		wait(2)
 		script.Parent.Parent.Parent:Destroy()
 	end)
@@ -116,21 +116,10 @@ function Code_LocalScript_2()
 end
 coroutine.wrap(Code_LocalScript_2)()
 wait(visibletime)
-		instances.Frame_1:TweenPosition(UDim2.new(1, -331, 1, 0), "InOut", "Sine", 7.2)
-		wait(2)
-		screenGui:Destroy()
-	
+screenGui:Destroy()
+
 	
 
 	end)
 end
-
 return notif
-
---[[
-PARAM 1: title: <string>
-PARAM 2: description: <string>
-PARAM 3: title font: <string>
-PARAM 4: description font: <string>
-PARAM 5: notification appearance time: <number>
-]]
