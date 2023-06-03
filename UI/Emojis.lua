@@ -25,7 +25,8 @@ return {
   ["eggshell"] = "🐚",
   ["box"] = "📦",
   ["save"] = "💾",
-  ["teddybear"] = "🧸 ";
+  ["teddybear"] = "🧸 ",
+  ["magnet"] = "🧲";
    
   
   
