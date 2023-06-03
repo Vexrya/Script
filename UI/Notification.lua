@@ -99,7 +99,7 @@ function Code_LocalScript_1() --LocalScript
 	local script = instances.LocalScript_1
 
 	script.Parent.MouseButton1Down:Connect(function()
-	    script.Parent.Parent:TweenPosition(UDim2.new(50, 0,0,0),"InOut","Sine",7.2)
+	    script.Parent.Parent:TweenPosition(UDim2.new(1, -331, 1, 0), "InOut", "Sine", 7.2)
 		wait(2)
 		script.Parent.Parent.Parent:Destroy()
 	end)
