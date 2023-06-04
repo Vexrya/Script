@@ -2915,7 +2915,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			else
 				Toggle.Parent = TabPage
 			end
-
 			if SelectedTheme ~= RayfieldLibrary.Theme.Default then
 				Toggle.Switch.Shadow.Visible = false
 			end
