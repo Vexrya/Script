@@ -1559,6 +1559,16 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Button.ElementIndicator.Text = ButtonSettings.Interact or 'button'
 			Button.Visible = true
 
+			Button.Icon.Visible = true
+			if ButtonSettings.Icon then 
+				if not string.match(ButtonSettings.Icon, "rbxassetid://") then
+					ButtonSettings.Icon = "rbxassetid://" .. tostring(ButtonSettings.Icon)
+				end
+				Button.Icon.Image = tostring(ButtonSettings.Icon)
+				Button.Icon.Visible = true
+				Button.Title.Position = UDim2.new(0, 50, 0, 22)
+			end
+
 			Button.BackgroundTransparency = 1
 			Button.UIStroke.Transparency = 1
 			Button.Title.TextTransparency = 1
@@ -1927,6 +1937,15 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Input.Parent = TabPage
 			end
 
+			Input.Icon.Visible = true
+			if InputSettings.Icon then 
+				if not string.match(InputSettings.Icon, "rbxassetid://") then
+					InputSettings.Icon = "rbxassetid://" .. tostring(InputSettings.Icon)
+				end
+				Input.Icon.Image = tostring(InputSettings.Icon)
+				Input.Icon.Visible = true
+				Input.Title.Position = UDim2.new(0, 50, 0, 22)
+			end
 
 			Input.BackgroundTransparency = 1
 			Input.UIStroke.Transparency = 1
@@ -2918,6 +2937,16 @@ function RayfieldLibrary:CreateWindow(Settings)
 			if SelectedTheme ~= RayfieldLibrary.Theme.Default then
 				Toggle.Switch.Shadow.Visible = false
 			end
+
+			Toggle.Icon.Visible = true
+			if ToggleSettings.Icon then 
+				if not string.match(ToggleSettings.Icon, "rbxassetid://") then
+					ToggleSettings.Icon = "rbxassetid://" .. tostring(ToggleSettings.Icon)
+				end
+				Toggle.Icon.Image = tostring(ToggleSettings.Icon)
+				Toggle.Icon.Visible = true
+				Toggle.Title.Position = UDim2.new(0, 50, 0, 22)
+			end
 			ToggleSettings.Locked = false
 			TweenService:Create(Toggle, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}):Play()
 			TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
@@ -3372,6 +3401,16 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Slider.Parent = SliderSettings.SectionParent.Holder
 			else
 				Slider.Parent = TabPage
+			end
+			
+			Slider.Icon.Visible = false
+			if SliderSettings.Icon then 
+				if not string.match(SliderSettings.Icon, "rbxassetid://") then
+					SliderSettings.Icon = "rbxassetid://" .. tostring(SliderSettings.Icon)
+				end
+				Slider.Icon.Image = tostring(DropdownSettings.Icon)
+				Slider.Icon.Visible = true
+				Slider.Title.Position = UDim2.new(0, 50, 0, 22)
 			end
 
 			Slider.BackgroundTransparency = 1
