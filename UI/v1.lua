@@ -2901,7 +2901,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Toggle.Title.Text = ToggleSettings.Name
 			Toggle.Visible = true
 
-			Toggle.BackgroundTransparency = 0.8
+			Toggle.BackgroundTransparency = 1
 			Toggle.UIStroke.Transparency = 1
 			Toggle.Title.TextTransparency = 1
 			Toggle.Switch.BackgroundColor3 = SelectedTheme.ToggleBackground
@@ -2915,10 +2915,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 			else
 				Toggle.Parent = TabPage
 			end
-			if SelectedTheme ~= RayfieldLibrary.Theme.Default then
-				Toggle.Switch.Shadow.Visible = false
-			end
 
+						-- Ajout de la partie du DropdownSettings.Icon
 			Toggle.Icon.Visible = true
 			if ToggleSettings.Icon then 
 				if not string.match(ToggleSettings.Icon, "rbxassetid://") then
@@ -2929,7 +2927,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Toggle.Title.Position = UDim2.new(0, 50, 0, 22)
 			end
 
-
+			if SelectedTheme ~= RayfieldLibrary.Theme.Default then
+				Toggle.Switch.Shadow.Visible = false
+			end
 			ToggleSettings.Locked = false
 			TweenService:Create(Toggle, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}):Play()
 			TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
