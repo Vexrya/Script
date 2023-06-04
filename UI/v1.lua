@@ -2916,17 +2916,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Toggle.Parent = TabPage
 			end
 
-						-- Ajout de la partie du DropdownSettings.Icon
-			Toggle.Icon.Visible = true
-			if ToggleSettings.Icon then 
-				if not string.match(ToggleSettings.Icon, "rbxassetid://") then
-					ToggleSettings.Icon = "rbxassetid://" .. tostring(ToggleSettings.Icon)
-				end
-				Toggle.Icon.Image = tostring(ToggleSettings.Icon)
-				Toggle.Icon.Visible = true
-				Toggle.Title.Position = UDim2.new(0, 50, 0, 22)
-			end
-
 			if SelectedTheme ~= RayfieldLibrary.Theme.Default then
 				Toggle.Switch.Shadow.Visible = false
 			end
