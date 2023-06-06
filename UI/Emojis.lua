@@ -30,7 +30,11 @@ return {
   ["Green"] = "🟩",
   ["Red"] = "🟥",
   ["Yellow"] = "🟨",
-  ["magnet"] = "🧲";
+  ["magnet"] = "🧲",
+  ["recipe"] = "🧾",
+  ["lightning"] = "⚡";
+  
+
    
   
   
