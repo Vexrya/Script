@@ -118,7 +118,7 @@ local ContentProvider = game:GetService("ContentProvider")
 -- local TextService = game:GetService("TextService")
 
 -- Interface Management
-local Rayfield = game:GetObjects("rbxassetid://13653554982")[1]
+local Rayfield = game:GetObjects("rbxassetid://13653989190")[1]
 
 pcall(function()
 _G.LastRayField.Name = 'Old Arrayfield'
@@ -1559,16 +1559,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Button.ElementIndicator.Text = ButtonSettings.Interact or 'button'
 			Button.Visible = true
 
-			Button.Icon.Visible = true
-			if ButtonSettings.Icon then 
-				if not string.match(ButtonSettings.Icon, "rbxassetid://") then
-					ButtonSettings.Icon = "rbxassetid://" .. tostring(ButtonSettings.Icon)
-				end
-				Button.Icon.Image = tostring(ButtonSettings.Icon)
-				Button.Icon.Visible = true
-				Button.Title.Position = UDim2.new(0, 50, 0, 22)
-			end
-
 			Button.BackgroundTransparency = 1
 			Button.UIStroke.Transparency = 1
 			Button.Title.TextTransparency = 1
@@ -1937,15 +1927,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Input.Parent = TabPage
 			end
 
-			Input.Icon.Visible = true
-			if InputSettings.Icon then 
-				if not string.match(InputSettings.Icon, "rbxassetid://") then
-					InputSettings.Icon = "rbxassetid://" .. tostring(InputSettings.Icon)
-				end
-				Input.Icon.Image = tostring(InputSettings.Icon)
-				Input.Icon.Visible = true
-				Input.Title.Position = UDim2.new(0, 50, 0, 22)
-			end
 
 			Input.BackgroundTransparency = 1
 			Input.UIStroke.Transparency = 1
@@ -2093,16 +2074,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			
 			Refresh()
 			
-			Dropdown.Icon.Visible = true
-			if DropdownSettings.Icon then 
-				if not string.match(DropdownSettings.Icon, "rbxassetid://") then
-					DropdownSettings.Icon = "rbxassetid://" .. tostring(DropdownSettings.Icon)
-				end
-				Dropdown.Icon.Image = tostring(DropdownSettings.Icon)
-				Dropdown.Icon.Visible = true
-				Dropdown.Title.Position = UDim2.new(0, 50, 0, 22)
-			end
-
+	
 			Dropdown.BackgroundTransparency = 1
 			Dropdown.UIStroke.Transparency = 1
 			Dropdown.Title.TextTransparency = 1
@@ -2518,7 +2490,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 				TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
 				TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
 			end
-
 			local function AddOption(Option,Selecteds)
 				local DropdownOption = Elements.Template.Dropdown.List.Template:Clone()
 				DropdownOption:GetPropertyChangedSignal('BackgroundTransparency'):Connect(function()
@@ -2630,7 +2601,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 					SaveConfiguration()
 				end)
 			end
-			local function AddOptions(Options,Selected)
+            
+            local function AddOptions(Options,Selected)
 				if typeof(Options) == 'table' then
 					for _, Option in ipairs(Options) do
 						AddOption(Option,Selected)
@@ -2644,58 +2616,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 					end
 				end
 			end
-			function DropdownSettings:Add(Items,Selected)
-				AddOptions(Items,Selected)
-			end
-			
-			AddOptions(DropdownSettings.Options, DropdownSettings.CurrentOption)
-			
-            --fix
-			function DropdownSettings:Set(NewOption)
-				
-				for _,o in pairs(NewOption) do
-
-					if typeof(NewOption) == 'table' then
-						
-						DropdownSettings.Items.Selected = NewOption
-					else
-						DropdownSettings.Items.Selected = {NewOption}
-					end
-					local Success, Response = pcall(function()
-						DropdownSettings.Callback(NewOption)
-					end)
-					if not Success then
-						TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
-						TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
-						Dropdown.Title.Text = "Callback Error"
-						print("Rayfield | "..DropdownSettings.Name.." Callback Error " ..tostring(Response))
-						wait(0.5)
-						Dropdown.Title.Text = DropdownSettings.Name
-						TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
-						TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
-					end
-					if DropdownSettings.Items[NewOption] then
-						local DropdownOption =  DropdownSettings.Items[NewOption]
-						DropdownOption.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-						
-						if Dropdown.Visible then
-							DropdownOption.BackgroundTransparency = 0
-							DropdownOption.UIStroke.Transparency = 0
-							DropdownOption.Title.TextTransparency = 0
-						else
-							DropdownOption.BackgroundTransparency = 1
-							DropdownOption.UIStroke.Transparency = 1
-							DropdownOption.Title.TextTransparency = 1
-						end
-						
-					end
-				end
-				--Dropdown.Selected.Text = NewText
-			end
-			function DropdownSettings:Error(text)
-				Error(text)
-			end
-			function DropdownSettings:Refresh(NewOptions,Selecteds)
+            
+            function DropdownSettings:Refresh(NewOptions,Selecteds)
 				DropdownSettings.Items = {}
 				DropdownSettings.Items.Selected = {}
 				for _, option in ipairs(Dropdown.List:GetChildren()) do
@@ -2936,16 +2858,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			end
 			if SelectedTheme ~= RayfieldLibrary.Theme.Default then
 				Toggle.Switch.Shadow.Visible = false
-			end
-
-			Toggle.Icon.Visible = true
-			if ToggleSettings.Icon then 
-				if not string.match(ToggleSettings.Icon, "rbxassetid://") then
-					ToggleSettings.Icon = "rbxassetid://" .. tostring(ToggleSettings.Icon)
-				end
-				Toggle.Icon.Image = tostring(ToggleSettings.Icon)
-				Toggle.Icon.Visible = true
-				Toggle.Title.Position = UDim2.new(0, 50, 0, 22)
 			end
 			ToggleSettings.Locked = false
 			TweenService:Create(Toggle, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}):Play()
@@ -3401,16 +3313,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Slider.Parent = SliderSettings.SectionParent.Holder
 			else
 				Slider.Parent = TabPage
-			end
-			
-			Slider.Icon.Visible = false
-			if SliderSettings.Icon then 
-				if not string.match(SliderSettings.Icon, "rbxassetid://") then
-					SliderSettings.Icon = "rbxassetid://" .. tostring(SliderSettings.Icon)
-				end
-				Slider.Icon.Image = tostring(DropdownSettings.Icon)
-				Slider.Icon.Visible = true
-				Slider.Title.Position = UDim2.new(0, 50, 0, 22)
 			end
 
 			Slider.BackgroundTransparency = 1
