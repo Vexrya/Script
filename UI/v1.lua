@@ -2490,7 +2490,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 				TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
 				TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
 			end
-			local function AddOption(Option,Selecteds)
+
+			   local function AddOption(Option,Selecteds)
 				local DropdownOption = Elements.Template.Dropdown.List.Template:Clone()
 				DropdownOption:GetPropertyChangedSignal('BackgroundTransparency'):Connect(function()
 					if DropdownOption.BackgroundTransparency == 1 then
@@ -2626,6 +2627,50 @@ function RayfieldLibrary:CreateWindow(Settings)
 					end
 				end
 				AddOptions(NewOptions,Selecteds)
+			end
+			function DropdownSettings:Set(NewOption)
+				
+				for _,o in pairs(NewOption) do
+
+					if typeof(NewOption) == 'table' then
+						
+						DropdownSettings.Items.Selected = NewOption
+					else
+						DropdownSettings.Items.Selected = {NewOption}
+					end
+					local Success, Response = pcall(function()
+						DropdownSettings.Callback(NewOption)
+					end)
+					if not Success then
+						TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
+						TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
+						Dropdown.Title.Text = "Callback Error"
+						print("Rayfield | "..DropdownSettings.Name.." Callback Error " ..tostring(Response))
+						wait(0.5)
+						Dropdown.Title.Text = DropdownSettings.Name
+						TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
+						TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
+					end
+					if DropdownSettings.Items[NewOption] then
+						local DropdownOption =  DropdownSettings.Items[NewOption]
+						DropdownOption.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+						
+						if Dropdown.Visible then
+							DropdownOption.BackgroundTransparency = 0
+							DropdownOption.UIStroke.Transparency = 0
+							DropdownOption.Title.TextTransparency = 0
+						else
+							DropdownOption.BackgroundTransparency = 1
+							DropdownOption.UIStroke.Transparency = 1
+							DropdownOption.Title.TextTransparency = 1
+						end
+						
+					end
+				end
+				--Dropdown.Selected.Text = NewText
+			end
+			function DropdownSettings:Error(text)
+				Error(text)
 			end
 			function DropdownSettings:Remove(Item)
 				if Item ~= Dropdown.List.PlaceHolder and Item ~= SearchBar then
@@ -3713,4 +3758,3 @@ if not getgenv().DisableArrayfieldAutoLoad then
 end
 
 RayfieldLibrary.UI = Rayfield
-return RayfieldLibrary
