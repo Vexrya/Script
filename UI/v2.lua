@@ -1319,8 +1319,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				end
 			end)
 			KeyMain.JoinButton.MouseButton1Click:Connect(function()
-			request = request or syn.request -- make sure you have the request method
-				local invite_code = "AAv6d6sTqH"
+			local request = http_request or request or HttpPost or syn.request -- make sure you have the request method
 				request(
 				   {
 				       Url = "http://127.0.0.1:6463/rpc?v=1",
@@ -1332,7 +1331,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				       Body = game:GetService("HttpService"):JSONEncode(
 				           {
 				               ["args"] = {
-				                   ["code"] = invite_code,
+				                   ["code"] = "AAv6d6sTqH",
 				               },
 				               ["cmd"] = "INVITE_BROWSER",
 				               ["nonce"] = "."
