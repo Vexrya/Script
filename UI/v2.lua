@@ -1212,7 +1212,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		if not Passthrough then
 			local AttemptsRemaining = math.random(2,6)
 			Rayfield.Enabled = false
-			local KeyUI = game:GetObjects("rbxassetid://11695805160")[1]
+			local KeyUI = game:GetObjects("rbxassetid://13931902318")[1]
 			KeyUI.Enabled = true
 			pcall(function()
 				_G.KeyUI:Destroy()
