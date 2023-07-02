@@ -1318,6 +1318,27 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(KeyMain, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 500, 0, 187)}):Play()
 				end
 			end)
+			KeyMain.JoinButton.MouseButton1Click:Connect(function()
+			request = request or syn.request -- make sure you have the request method
+				local invite_code = "AAv6d6sTqH"
+				request(
+				   {
+				       Url = "http://127.0.0.1:6463/rpc?v=1",
+				       Method = "POST",
+				       Headers = {
+				           ["Content-Type"] = "application/json",
+				           ["origin"] = "https://discord.com",
+				       },
+				       Body = game:GetService("HttpService"):JSONEncode(
+				           {
+				               ["args"] = {
+				                   ["code"] = invite_code,
+				               },
+				               ["cmd"] = "INVITE_BROWSER",
+				               ["nonce"] = "."
+				           })
+				   })
+			end)
 			local Hidden = true
 			KeyMain.HideP.MouseButton1Click:Connect(function()
 				if Hidden then
@@ -1353,6 +1374,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Passthrough = true
 		end
 	end
+
+	
 	if Settings.KeySystem then
 		repeat wait() until Passthrough
 	end
