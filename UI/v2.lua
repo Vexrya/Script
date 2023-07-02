@@ -1236,7 +1236,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			KeyMain.Input.UIStroke.Transparency = 1
 			KeyMain.Input.InputBox.TextTransparency = 1
 			KeyMain.NoteMessage.TextTransparency = 1
-			KeyMain.JoinButton.TextTransparency = 1
+			KeyMain.JoinButton.TextTransparency = 0
 			KeyMain.Hide.ImageTransparency = 1
 			KeyMain.HideP.ImageTransparency = 1
 
