@@ -32,6 +32,10 @@ return {
   ["Yellow"] = "🟨",
   ["magnet"] = "🧲",
   ["recipe"] = "🧾",
+  ["biceps"] = "💪",
+  ["dumbells"] = "❚█══█❚",
+  ["barbells"] = "▐━━━━━▌",
+  ["fist"] = "✊",
   ["lightning"] = "⚡";
   
 
