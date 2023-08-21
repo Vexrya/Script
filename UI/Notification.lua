@@ -25,4 +25,4 @@ TextLabel_1.TextWrapped = true
 UIStroke_1.Parent = TextLabel_1
 UIStroke_1.Thickness = 1
 end
-return CreateNotification() 
+return CreateNotification(text,size) 
