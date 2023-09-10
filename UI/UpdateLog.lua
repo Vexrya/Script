@@ -236,7 +236,7 @@ function SetDescription(description)
     Description_1.Text = description
 end
 
-local function CreateLabel(num,text)
+function CreateLabel(num,text)
   Title_3.Name = "Title"
   Title_3.Parent = List_1
   Title_3.AnchorPoint = Vector2.new(0.5, 0.5)
