@@ -237,7 +237,7 @@ function SetDescription(description)
 end
 
 local labelCount = 0
-local function CreateLabel(text)
+function CreateLabel(text)
   labelCount = labelCount + 1
   Title_3.Name = "Title"
   Title_3.Parent = List_1
