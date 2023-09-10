@@ -236,14 +236,14 @@ function SetDescription(description)
     Description_1.Text = description
 end
 
-function CreateLabel(num,text)
+function CreateLabel(text)
   Title_3.Name = "Title"
   Title_3.Parent = List_1
   Title_3.AnchorPoint = Vector2.new(0.5, 0.5)
   Title_3.BackgroundColor3 = Color3.fromRGB(95,184,253)
   Title_3.BackgroundTransparency = 1
   Title_3.BorderSizePixel = 0
-  Title_3.LayoutOrder = num,
+  Title_3.LayoutOrder = 1,
   Title_3.Position = UDim2.new(0.515993178, 0,0.100999981, 0)
   Title_3.Size = UDim2.new(0.968013644, 0,0.142000005, 0)
   Title_3.Image = "rbxassetid://11675679733"
