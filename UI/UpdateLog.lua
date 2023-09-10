@@ -31,7 +31,7 @@ local Frame_1 = Instance.new("Frame")
 
 -- Properties:
 UpdateLog.Name = "Update"
-UpdateLog.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+UpdateLog.Parent = game:GetService("CoreGui")
 
 ImageLabel_1.Parent = UpdateLog
 ImageLabel_1.AnchorPoint = Vector2.new(0.5, 0.5)
