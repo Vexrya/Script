@@ -243,7 +243,7 @@ end
     Title_3.BackgroundColor3 = Color3.fromRGB(95, 184, 253)
     Title_3.BackgroundTransparency = 1
     Title_3.BorderSizePixel = 0
-    Title_3.LayoutOrder = 1
+    Title_3.LayoutOrder = 2
     Title_3.Position = UDim2.new(0.515993178, 0, 0.100999981, 0)
     Title_3.Size = UDim2.new(0.968013644, 0, 0.142000005, 0)
     Title_3.Image = "rbxassetid://11675679733"
@@ -277,9 +277,7 @@ end
 
 
 -- Usage example:
-CreateLabel(1, "This is the first update.")
-CreateLabel(2, "This is the second update.")
-CreateLabel(3, "This is the third update.")
+
 UIListLayout_1.Parent = List_1
 UIListLayout_1.HorizontalAlignment = Enum.HorizontalAlignment.Center
 UIListLayout_1.SortOrder = Enum.SortOrder.LayoutOrder
