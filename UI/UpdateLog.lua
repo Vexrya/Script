@@ -235,7 +235,7 @@ UIStroke_4.Thickness = 1.4676364660263062
 function SetDescription(description)
     Description_1.Text = description
 end
-function CreateLabel(num, text)
+
     local Title_3 = Instance.new("ImageLabel")
     Title_3.Name = "Title"
     Title_3.Parent = List_1
@@ -243,7 +243,7 @@ function CreateLabel(num, text)
     Title_3.BackgroundColor3 = Color3.fromRGB(95, 184, 253)
     Title_3.BackgroundTransparency = 1
     Title_3.BorderSizePixel = 0
-    Title_3.LayoutOrder = num
+    Title_3.LayoutOrder = 1
     Title_3.Position = UDim2.new(0.515993178, 0, 0.100999981, 0)
     Title_3.Size = UDim2.new(0.968013644, 0, 0.142000005, 0)
     Title_3.Image = "rbxassetid://11675679733"
@@ -263,7 +263,7 @@ function CreateLabel(num, text)
     w_2.Position = UDim2.new(0, 0, 0.460000008, 0)
     w_2.Size = UDim2.new(1, 0, 0.600000024, 0)
     w_2.Font = Enum.Font.FredokaOne
-    w_2.Text = text
+    w_2.Text = "TEST"
     w_2.TextColor3 = Color3.fromRGB(255, 255, 255)
     w_2.TextScaled = true
     w_2.TextSize = 14
@@ -274,7 +274,7 @@ function CreateLabel(num, text)
     UIStroke_5.Color = Color3.fromRGB(20, 20, 20)
     UIStroke_5.LineJoinMode = Enum.LineJoinMode.Bevel
     UIStroke_5.Thickness = 1.4676364660263062
-end
+
 
 -- Usage example:
 CreateLabel(1, "This is the first update.")
