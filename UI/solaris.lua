@@ -1185,7 +1185,7 @@ function SolarisLib:New(Config)
 
                 function Paragraph:SetContent(tochange)
                     ParagraphFrame.Content.Text = tochange
-                    Paragraph.Name = content .. "element"
+                    ParagraphFrame.Name = content .. "element"
                 end  
                 spawn(function()
                     while wait() do
