@@ -11,6 +11,7 @@ NotificationHolder.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
+local TextService = game:GetService("TextService")
 local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
@@ -1193,9 +1194,9 @@ function SolarisLib:New(Config)
                         local textSize = TextService:GetTextSize(ParagraphFrame.Content.Text, ParagraphFrame.Content.TextSize, ParagraphFrame.Content.Font, Vector2.new(math.huge, math.huge))
                         
                         -- Update the size and position of the elements based on the text size
-                        ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, textSize.Y - 20)
+                        ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, textSize.Y)
                         ParagraphFrame.Content.Position = UDim2.new(0, 0, 0, 0)
-                        ParagraphFrame.Size = UDim2.new(1, 0, 0, textSize.Y + 1)
+                        ParagraphFrame.Size = UDim2.new(1, 0, 0, textSize.Y + 10)
                         
                         -- Adjust the theme colors
                         ParagraphFrame.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].Label
