@@ -1176,15 +1176,6 @@ function SolarisLib:New(Config)
                 ParagraphFrame.Title.Text = title
                 ParagraphFrame.Content.Text = content
                 ParagraphFrame.Name = title .. "element"
-                ParagraphFrame.Size = UDim2.new(1, 0, 0, 50) 
-            
-
-                local function updateFrameSize()
-                    local contentTextSize = ParagraphFrame.Content.TextBounds.Y
-
-                    ParagraphFrame.Size = UDim2.new(1, 0, 0, 50 + contentTextSize)  
-                    ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, contentTextSize)
-                end
             
                 function Paragraph:SetTitle(tochange)
                     ParagraphFrame.Title.Text = tochange
@@ -1193,15 +1184,20 @@ function SolarisLib:New(Config)
             
                 function Paragraph:SetContent(tochange)
                     ParagraphFrame.Content.Text = tochange
-                    updateFrameSize() 
+                    ParagraphFrame.Name = content .. "element"
                 end  
-            
-
-                updateFrameSize()
             
                 spawn(function()
                     while wait() do
-                        updateFrameSize()
+                        -- Measure the text size
+                        local textSize = TextService:GetTextSize(ParagraphFrame.Content.Text, ParagraphFrame.Content.TextSize, ParagraphFrame.Content.Font, Vector2.new(math.huge, math.huge))
+                        
+                        -- Update the size and position of the elements based on the text size
+                        ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, textSize.Y)
+                        ParagraphFrame.Content.Position = UDim2.new(0, 0, 0, 0)
+                        ParagraphFrame.Size = UDim2.new(1, 0, 0, textSize.Y + 40)
+                        
+                        -- Adjust the theme colors
                         ParagraphFrame.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].Label
                         ParagraphFrame.Title.TextColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].TextColor
                     end
@@ -1209,6 +1205,7 @@ function SolarisLib:New(Config)
             
                 return Paragraph
             end
+            
             
 
 
