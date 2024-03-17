@@ -1191,7 +1191,7 @@ function SolarisLib:New(Config)
                 spawn(function()
                     while wait() do
                         -- Measure the text size
-                        local textSize = TextService:GetTextSize(ParagraphFrame.Content.Text, ParagraphFrame.Content.TextSize, ParagraphFrame.Content.Font, Vector2.new(math.huge, math.huge))
+                        local textSize = TextService:GetTextSize(ParagraphFrame.Content.Text, ParagraphFrame.Content.TextSize, Vector2.new(math.huge, math.huge))
                         
                         -- Update the size and position of the elements based on the text size
                         ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, textSize.Y)
