@@ -1175,7 +1175,16 @@ function SolarisLib:New(Config)
                 ParagraphFrame.Parent = Section
                 ParagraphFrame.Title.Text = title
                 ParagraphFrame.Content.Text = content
-                ParagraphFrame.Name = title .. " element"
+                ParagraphFrame.Name = title .. "element"
+                ParagraphFrame.Size = UDim2.new(1, 0, 0, 50) 
+            
+
+                local function updateFrameSize()
+                    local contentTextSize = ParagraphFrame.Content.TextBounds.Y
+
+                    ParagraphFrame.Size = UDim2.new(1, 0, 0, 50 + contentTextSize)  
+                    ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, contentTextSize)
+                end
             
                 function Paragraph:SetTitle(tochange)
                     ParagraphFrame.Title.Text = tochange
@@ -1184,31 +1193,23 @@ function SolarisLib:New(Config)
             
                 function Paragraph:SetContent(tochange)
                     ParagraphFrame.Content.Text = tochange
-                    ParagraphFrame.Name = content .. "element"
-                    updateFrameSize()
+                    updateFrameSize() 
                 end  
             
 
-                local function updateFrameSize()
-
-                    local contentTextSize = ParagraphFrame.Content.TextBounds.Y
-                    
-
-                    ParagraphFrame.Size = UDim2.new(1, 0, 0, contentTextSize)
-                    ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, contentTextSize)
-                end
+                updateFrameSize()
             
                 spawn(function()
                     while wait() do
+                        updateFrameSize()
                         ParagraphFrame.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].Label
                         ParagraphFrame.Title.TextColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].TextColor
-                        updateFrameSize()  
                     end
                 end)
             
                 return Paragraph
             end
-
+            
 
 
 
