@@ -1,6 +1,6 @@
 -- This User Interface Library is brought to you by Solaris Software.
 local Solaris = Instance.new("ScreenGui")
-Solaris.Name = "dosage's solaris gui"
+Solaris.Name = "Solaris"
 Solaris.Parent = game.CoreGui
 Solaris.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -1149,7 +1149,7 @@ function SolarisLib:New(Config)
                 return ColorPicker
             end
             function ItemHold:Label(text)
-                local Label, LabelFrame = {}, game:GetObjects("rbxassetid://7032552322")[1]
+                local Label, LabelFrame = {}, game:GetObjects("rbxassetid://16782965859")[1]
                 LabelFrame.Parent = Section
                 LabelFrame.Title.Text = text
                 LabelFrame.Name = text .. "element"
@@ -1169,6 +1169,36 @@ function SolarisLib:New(Config)
 
                 return Label
             end
+
+
+            function ItemHold:Paragraph(title,content)
+                local Paragraph, ParagraphFrame = {}, game:GetObjects("rbxassetid://16782967635")[1]
+                ParagraphFrame.Parent = Section
+                ParagraphFrame.Title.Text = title
+				ParagraphFrame.Content.Text = content
+                ParagraphFrame.Name = title .. "element"
+
+                function Paragraph:SetTitle(tochange)
+                    ParagraphFrame.Title.Text = tochange
+                    ParagraphFrame.Name = title .. "element"
+                end    
+
+                function Paragraph:SetContent(tochange)
+                    ParagraphFrame.Content.Text = tochange
+                    Paragraph.Name = content .. "element"
+                end  
+                spawn(function()
+                    while wait() do
+                       ParagraphFrame.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].Label
+                       ParagraphFrame.Title.TextColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].TextColor
+                    end
+                end)
+
+                return Paragraph
+            end
+
+
+	   
             function ItemHold:Textbox(text,disappear,callback)
                 local Textbox, TextboxFrame = {}, game:GetObjects("rbxassetid://7147292392")[1]
                 TextboxFrame.Parent = Section
