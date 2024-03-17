@@ -1196,7 +1196,7 @@ function SolarisLib:New(Config)
                         -- Update the size and position of the elements based on the text size
                         ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, textSize.Y)
                         ParagraphFrame.Content.Position = UDim2.new(0, 10, 0, 32)
-                        ParagraphFrame.Size = UDim2.new(1, 0, 0, textSize.Y + 10)
+                        ParagraphFrame.Size = UDim2.new(1, 0, 0, textSize.Y + 60)
                         
                         -- Adjust the theme colors
                         ParagraphFrame.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].Label
