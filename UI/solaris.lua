@@ -1187,16 +1187,10 @@ function SolarisLib:New(Config)
                     ParagraphFrame.Content.Text = tochange
                     ParagraphFrame.Name = content .. "element"
                 end  
-            	-- Calculate the size of the content text
 		local contentTextSize = ParagraphFrame.Content.TextBounds.Y
-		print("Content Text Size:", contentTextSize)
+		ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, contentTextSize + 10)
 		
-		-- Set the size of the content frame to fit the text
-		ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, contentTextSize)
-		
-		-- Set the size of the main frame to accommodate the content plus additional spacing (e.g., 50 pixels)
-		local totalFrameHeight = contentTextSize + 50
-		print("Total Frame Height:", totalFrameHeight)
+		local totalFrameHeight = contentTextSize + 40
 		ParagraphFrame.Size = UDim2.new(1, 0, 0, totalFrameHeight)
 
                 spawn(function()
