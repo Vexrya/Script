@@ -1176,39 +1176,43 @@ function SolarisLib:New(Config)
 
                 return Label
             end
-
-            function ItemHold:Paragraph(title, content)
-                local Paragraph, ParagraphFrame = {}, game:GetObjects("rbxassetid://16782967635")[1]
-                ParagraphFrame.Parent = Section
-                ParagraphFrame.Title.Text = title
-                ParagraphFrame.Content.Text = content
-                ParagraphFrame.Name =  title .. "element"
-            
-                function Paragraph:SetTitle(tochange)
-                    ParagraphFrame.Title.Text = tochange
-                end    
-            
-                function Paragraph:SetContent(tochange)
-                    ParagraphFrame.Content.Text = tochange
-                end  
-
-		ParagraphFrame.Content.TextWrapped = true
-		local contentTextSize = ParagraphFrame.Content.TextBounds.Y
-		ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, contentTextSize + 10)
+			
+	    function ItemHold:Paragraph(title, content)
+		    local Paragraph, ParagraphFrame = {}, game:GetObjects("rbxassetid://16782967635")[1]
+		    ParagraphFrame.Parent = Section
+		    ParagraphFrame.Title.Text = title
+		    ParagraphFrame.Content.Text = content
+		    ParagraphFrame.Name =  title .. " element"
 		
-		local totalFrameHeight = contentTextSize + 40
-		ParagraphFrame.Size = UDim2.new(1, 0, 0, totalFrameHeight)
+		    function Paragraph:SetTitle(tochange)
+		        ParagraphFrame.Title.Text = tochange
+		    end    
+		
+		    function Paragraph:SetContent(tochange)
+		        ParagraphFrame.Content.Text = tochange
+		        -- Delay before calculating text size
+		        wait(0.2)
+		        local contentTextSize = ParagraphFrame.Content.TextBounds.Y
+		        ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, contentTextSize + 10)
+		        local totalFrameHeight = contentTextSize + 40
+		        ParagraphFrame.Size = UDim2.new(1, 0, 0, totalFrameHeight)
+		    end  
 
-                spawn(function()
-                    while wait() do
-                        ParagraphFrame.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].Label
-                        ParagraphFrame.Title.TextColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].TextColor
-                    end
-                end)
-            
-                return Paragraph
-            end
-            
+			local contentTextSize = ParagraphFrame.Content.TextBounds.Y
+		        ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, contentTextSize + 10)
+		        local totalFrameHeight = contentTextSize + 40
+		        ParagraphFrame.Size = UDim2.new(1, 0, 0, totalFrameHeight)
+		
+		    spawn(function()
+		        while wait() do
+		            ParagraphFrame.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].Label
+		            ParagraphFrame.Title.TextColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].TextColor
+		        end
+		    end)
+		
+		    return Paragraph
+		end
+
             
 
 
