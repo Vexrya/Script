@@ -1190,14 +1190,12 @@ function SolarisLib:New(Config)
 		
 		    function Paragraph:SetContent(tochange)
 		        ParagraphFrame.Content.Text = tochange
-		        -- Delay before calculating text size
-		        wait(0.2)
-		        local contentTextSize = ParagraphFrame.Content.TextBounds.Y
-		        ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, contentTextSize + 10)
-		        local totalFrameHeight = contentTextSize + 40
-		        ParagraphFrame.Size = UDim2.new(1, 0, 0, totalFrameHeight)
 		    end  
-		
+
+		    ParagraphFrame.Content:GetPropertyChangedSignal("Text"):Connect(function()
+		        ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, ParagraphFrame.Content.TextBounds.Y)
+		        ParagraphFrame.Size = UDim2.new(1, 0, 0, ParagraphFrame.Content.TextBounds.Y + 35)
+		    end)
 		    spawn(function()
 		        while wait() do
 		            ParagraphFrame.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].Label
