@@ -1192,7 +1192,11 @@ function SolarisLib:New(Config)
                 function Paragraph:SetContent(tochange)
                     ParagraphFrame.Content.Text = tochange
                     ParagraphFrame.Name = content .. "element"
+		    local contentTextSize = ParagraphFrame.Content.TextBounds.Y
+		    ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, contentTextSize + 10)
+		    ParagraphFrame.Size = UDim2.new(1, 0, 0, contentTextSize + 40)
                 end  
+
 		local contentTextSize = ParagraphFrame.Content.TextBounds.Y
 		ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, contentTextSize + 10)
 		
