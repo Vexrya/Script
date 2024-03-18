@@ -1181,21 +1181,24 @@ function SolarisLib:New(Config)
 		    local Paragraph, ParagraphFrame = {}, game:GetObjects("rbxassetid://16782967635")[1]
 		    ParagraphFrame.Parent = Section
 		    ParagraphFrame.Title.Text = title
-		    ParagraphFrame.Content.Text = content
+		    
 		    ParagraphFrame.Name =  title .. " element"
 		
 		    function Paragraph:SetTitle(tochange)
 		        ParagraphFrame.Title.Text = tochange
 		    end    
 		
+		   
+
+		    ParagraphFrame.Content:GetPropertyChangedSignal("Text"):Connect(function()
+		        ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, ParagraphFrame.Content.TextBounds.Y + 35)
+		        ParagraphFrame.Size = UDim2.new(1, 0, 0, ParagraphFrame.Content.TextBounds.Y + 35)
+		    end)
+
+		    ParagraphFrame.Content.Text = content
 		    function Paragraph:SetContent(tochange)
 		        ParagraphFrame.Content.Text = tochange
 		    end  
-
-		    ParagraphFrame.Content:GetPropertyChangedSignal("Text"):Connect(function()
-		        ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, ParagraphFrame.Content.TextBounds.Y)
-		        ParagraphFrame.Size = UDim2.new(1, 0, 0, ParagraphFrame.Content.TextBounds.Y + 35)
-		    end)
 		    spawn(function()
 		        while wait() do
 		            ParagraphFrame.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].Label
