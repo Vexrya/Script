@@ -1182,19 +1182,16 @@ function SolarisLib:New(Config)
                 ParagraphFrame.Parent = Section
                 ParagraphFrame.Title.Text = title
                 ParagraphFrame.Content.Text = content
-                ParagraphFrame.Name = title .. "element"
+                ParagraphFrame.Name =  title .. "element"
             
                 function Paragraph:SetTitle(tochange)
                     ParagraphFrame.Title.Text = tochange
-                    ParagraphFrame.Name = title .. "element"
+                    ParagraphFrame.Name =  title.. "Element"
                 end    
             
                 function Paragraph:SetContent(tochange)
                     ParagraphFrame.Content.Text = tochange
-                    ParagraphFrame.Name = content .. "element"
-		    local contentTextSize = ParagraphFrame.Content.TextBounds.Y
-		    ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, contentTextSize + 10)
-		    ParagraphFrame.Size = UDim2.new(1, 0, 0, contentTextSize + 40)
+                    ParagraphFrame.Name = tochange .. "element"
                 end  
 
 		local contentTextSize = ParagraphFrame.Content.TextBounds.Y
