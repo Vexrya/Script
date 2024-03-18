@@ -1,4 +1,5 @@
 -- This User Interface Library is brought to you by Solaris Software.
+-- Edited by Odrexyo
 local Solaris = Instance.new("ScreenGui")
 Solaris.Name = "Solaris"
 Solaris.Parent = game.CoreGui
@@ -1149,10 +1150,15 @@ function SolarisLib:New(Config)
 
                 return ColorPicker
             end
-            function ItemHold:Label(text)
+            function ItemHold:Label(text,boolean) -- true/false to center the text
                 local Label, LabelFrame = {}, game:GetObjects("rbxassetid://16782965859")[1]
                 LabelFrame.Parent = Section
                 LabelFrame.Title.Text = text
+		if boolean == true then 
+		    LabelFrame.Title.TextXAlignment = Enum.TextXAlignment.Center
+		    LabelFrame.Title.TextYAlignment = Enum.TextYAlignment.Center
+		end
+
                 LabelFrame.Name = text .. "element"
 
                 function Label:Set(tochange)
