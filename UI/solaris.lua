@@ -1188,12 +1188,11 @@ function SolarisLib:New(Config)
                     ParagraphFrame.Name = content .. "element"
                 end  
             	local contentTextSize = ParagraphFrame.Content.TextBounds.Y
+		ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, ParagraphFrame.Content.TextBounds.Y)
+       		ParagraphFrame.Size = UDim2.new(1, 0, 0,  contentTextSize + 35)
+
                 spawn(function()
                     while wait() do
-			
-                        ParagraphFrame.Content.Size = UDim2.new(1, 0, 0, ParagraphFrame.Content.TextBounds.Y)
-       			ParagraphFrame.Size = UDim2.new(1, 0, 0,  contentTextSize + 35)
-
                         ParagraphFrame.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].Label
                         ParagraphFrame.Title.TextColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].TextColor
                     end
