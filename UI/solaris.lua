@@ -1215,7 +1215,7 @@ function SolarisLib:New(Config)
 
 	   
             function ItemHold:Textbox(text,disappear,callback)
-                local Textbox, TextboxFrame = {}, game:GetObjects("rbxassetid://7147292392")[1]
+                local Textbox, TextboxFrame = {}, game:GetObjects("rbxassetid://16810255963")[1]
                 TextboxFrame.Parent = Section
                 TextboxFrame.Title.Text = text
                 TextboxFrame.Name = text .. "element"
@@ -1223,7 +1223,7 @@ function SolarisLib:New(Config)
                 TextboxFrame.Box.Changed:Connect(function()
                     TextboxFrame.Box.Size = UDim2.new(0,TextboxFrame.Box.TextBounds.X + 16,0,22)
                 end)
-                TextboxFrame.Box.PlaceholderText = "                  "
+                TextboxFrame.Box.PlaceholderText = "Input"
 
                 TextboxFrame.InputBegan:Connect(function(input)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 then
