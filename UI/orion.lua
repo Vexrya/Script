@@ -319,7 +319,7 @@ CreateElement("RoundFrame", function(Color, Scale, Offset)
 	local Frame = Create("Frame", {
 		BackgroundColor3 = Color or Color3.fromRGB(255, 255, 255),
 		BorderSizePixel = 0,
-		BackgroundTransparency = 0.1,
+		BackgroundTransparency = 0, -- change to 0.1 if you want fluent style
 	}, {
 		Create("UICorner", {
 			CornerRadius = UDim.new(Scale, Offset)
