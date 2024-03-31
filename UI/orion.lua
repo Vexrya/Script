@@ -29,10 +29,10 @@ local OrionLib = {
 	Flags = {},
 	Themes = {
 		Default = {
-			Main = Color3.fromRGB(45, 45, 45),
-			Second = Color3.fromRGB(45, 45, 45),
+			Main = Color3.fromRGB(27, 27, 27),
+			Second = Color3.fromRGB(25,25,25),
 			Stroke = Color3.fromRGB(60, 60, 60),
-			Divider = Color3.fromRGB(45, 45, 45),
+			Divider = Color3.fromRGB(25, 25, 25),
 			Text = Color3.fromRGB(240, 240, 240),
 			TextDark = Color3.fromRGB(150, 150, 150)
 		}
@@ -42,7 +42,7 @@ local OrionLib = {
 	SaveCfg = false
 }
 
---Feather Icons https://github.com/evoincorp/lucideblox/tree/master/src/modules/util - Created by 7kayoh
+
 local Icons = {}
 
 local Success, Response = pcall(function()
