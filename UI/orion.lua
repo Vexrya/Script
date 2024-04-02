@@ -419,7 +419,7 @@ function OrionLib:MakeNotification(NotificationConfig)
 			Size = UDim2.new(1, 0, 0, 0),
 			Position = UDim2.new(1, -55, 0, 0),
 			BackgroundColor3 = Color3.new(0.176471, 0.176471, 0.176471),
-			BackgroundTransparency = 0.15,
+			BackgroundTransparency = 0,
 			AutomaticSize = Enum.AutomaticSize.Y
 		}), {
 			MakeElement("Stroke", Color3.fromRGB(30, 30, 30), 1.2),
