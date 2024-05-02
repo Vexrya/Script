@@ -1,4 +1,4 @@
-local MythicLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/MythicLib"))()
+local MythicLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Vexrya/Script/main/UI/Mythic%20Lib/source.lua"))()
 
 local Window = MythicLib:MakeWindow({
     Title = "Trust",
