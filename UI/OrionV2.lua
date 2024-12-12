@@ -51,6 +51,7 @@ local L_10_ = {
     SaveCfg = false
 }
 
+--[[
 local L_11_ = [[
     {
       "icons": {
@@ -621,12 +622,12 @@ local L_11_ = [[
         "wrench": "rbxassetid://7743878358"
       }
     }
-]]
+
 pcall(function()
     L_11_ = game:HttpGet("https://raw.githubusercontent.com/ttwizz/Documents/master/icons.json", true)
 end)
 L_11_ = L_7_:JSONDecode(L_11_).icons
-
+]]
 
 local L_12_ = Instance.new("ScreenGui")
 L_12_.Name = string.lower(string.reverse(string.sub(L_7_:GenerateGUID(false), 1, 8)))
