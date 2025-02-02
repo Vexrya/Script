@@ -25,7 +25,7 @@ if Code ~= "404: Not Found" then
 else
 	Notify("Game not found, loading universal.")
 	getgenv().ScriptVersion = "Universal"
-	Code = game:HttpGet("https://raw.githubusercontent.com/alyssagithub/Scripts/refs/heads/main/FrostByte/Core.lua")
+	Code = game:HttpGet("https://raw.githubusercontent.com/Vexrya/Script/refs/heads/main/Main/Core.lua")
 end
 
 getgenv().FrostByteHandleFunction(loadstring(Code))
