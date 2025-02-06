@@ -3,10 +3,11 @@ local StartLoadTime = tick()
 
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
+local StarterGui = game:GetService("StarterGui")
 
 local Player = Players.LocalPlayer
 
-local PlaceName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+local PlaceName: string = getgenv().PlaceName or game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 
 local getgenv: () -> ({[string]: any}) = getfenv().getgenv
 
@@ -20,28 +21,15 @@ local isrbxactive: () -> (boolean) = getfenv().isrbxactive
 local setclipboard: (Text: string) -> () = getfenv().setclipboard
 local firesignal: (RBXScriptSignal) -> () = getfenv().firesignal
 
+
 local ScriptVersion = getgenv().ScriptVersion
-
-function Notify(Title: string, Content: string, Image: string)
-	if not Rayfield then
-		return
-	end
-	
-	Rayfield:Notify({
-		Title = Title,
-		Content = Content,
-		Duration = 10,
-		Image = Image or "info",
-	})
-end
-
-getgenv().Notify = Notify
 
 getgenv().gethui = function()
 	return game:GetService("CoreGui")
 end
 
 getgenv().FrostByteConnections = getgenv().FrostByteConnections or {}
+
 
 local function HandleConnection(Connection: RBXScriptConnection, Name: string)
 	if getgenv().FrostByteConnections[Name] then
@@ -88,23 +76,59 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Vexrya/Script/refs/he
 	
 	]])
 end
-
-task.spawn(function()
-	while task.wait(Random.new():NextNumber(5 * 60, 10 * 60)) do
-		Notify("Enjoying this script?", "Join the discord at discord.gg/Y4byXdAKuA", "heart")
-	end
-end)
-
---loadstring(game:HttpGet("https://raw.githubusercontent.com/alyssagithub/Scripts/refs/heads/main/FrostByte/Analytics.lua"))()
+task.wait(1)
 
 if getgenv().Rayfield then
 	getgenv().Rayfield:Destroy()
 end
 
-Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+local Success, Rayfield = pcall(function()
+	return loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+end)
+
+local function SendNotification(Title: string, Text: string, Duration: number?, Button1: string?, Button2: string?, Callback: BindableFunction?)
+	StarterGui:SetCore("SendNotification", {
+		Title = Title,
+		Text = Text,
+		Duration = Duration or 10,
+		Button1 = Button1,
+		Button2 = Button2,
+		Callback = Callback
+	})
+end
+
+if not Success or not Rayfield or not Rayfield.CreateWindow then
+	SendNotification("Error while loading Rayfield", "Try re-executing or rejoining.")
+	error("Error while loading Rayfield")
+	return
+end
+
 local Flags: {[string]: {["CurrentValue"]: any, ["CurrentOption"]: {string}}} = Rayfield.Flags
 
-getgenv().Rayfield = Rayfield
+getgenv().Flags = Flags
+
+local function Notify(Title: string, Content: string, Image: string)
+	if not Rayfield then
+		return
+	end
+
+	Rayfield:Notify({
+		Title = Title,
+		Content = Content,
+		Duration = 10,
+		Image = Image or "info",
+	})
+end
+
+getgenv().Notify = Notify
+
+task.spawn(function()
+	while task.wait(Random.new():NextNumber(5 * 60, 10 * 60)) do
+		Notify("Enjoying this script?", "Join the discord at discord.gg/sS3tDP6FSB", "heart")
+	end
+end)
+
+
 
 local PlaceFileName = getgenv().PlaceFileName
 
@@ -153,15 +177,7 @@ if PlaceFileName then
 			if Result == ScriptVersion then
 				continue
 			end
-
-			game:GetService("StarterGui"):SetCore("SendNotification", {
-				Title = "A new  version has been detected!",
-				Text = "Would you like to load it?",
-				Duration = math.huge,
-				Button1 = Button1,
-				Button2 = Button2,
-				Callback = BindableFunction,
-			})
+            SendNotification("A new FrostByte version has been detected!", "Would you like to load it?", math.huge, Button1, Button2, BindableFunction)
 
 			break
 		end
@@ -169,7 +185,7 @@ if PlaceFileName then
 end
 
 Window = Rayfield:CreateWindow({
-	Name = `FrostByte | {PlaceName} | {ScriptVersion or "Dev Mode"}`,
+	Name = `Vexrya | {PlaceName} | {ScriptVersion or "Dev Mode"}`,
 	Icon = "snowflake",
 	LoadingTitle = "❄ Brought to you by Vexrya ❄",
 	LoadingSubtitle = PlaceName,
@@ -344,39 +360,46 @@ function CreateUniversalTabs()
 		
 		return if Success then Result else 0
 	end
+	local function GetStaffRole(CheckPlayer: Player)
+		local StaffRole
+
+		if IsInGroup(CheckPlayer, 1200769) then
+			StaffRole = "Roblox Admin"
+		end
+
+		if game.CreatorType ~= Enum.CreatorType.Group then
+			return
+		end
+
+		local CreatorId = game.CreatorId
+
+		local Role = GetRoleInGroup(CheckPlayer, CreatorId)
+
+		for _, Name in StaffRoleNames do
+			if typeof(Role) == "string" and Role:lower():find(Name) then
+				StaffRole = Role
+			end
+		end
+
+		if GetRankInGroup(CheckPlayer, CreatorId) == 255 then
+			StaffRole = "Group Owner"
+		end
+		
+		return StaffRole
+	end
 	
 	local function CheckIfStaff(CheckPlayer: Player)
 		if not Flags.StaffJoin.CurrentValue then
 			return
 		end
 		
-		local StaffRole
+		local StaffRole = GetStaffRole(CheckPlayer)
 		
-		if IsInGroup(CheckPlayer, 1200769) then
-			StaffRole = "Roblox Admin"
-		end
-		
-		if game.CreatorType ~= Enum.CreatorType.Group then
+		if not StaffRole then
 			return
 		end
 		
-		local CreatorId = game.CreatorId
-		
-		local Role = GetRoleInGroup(CheckPlayer, CreatorId)
-		
-		for _, Name in StaffRoleNames do
-			if typeof(Role) == "string" and Role:lower():find(Name) then
-				StaffRole = Role
-			end
-		end
-		
-		if GetRankInGroup(CheckPlayer, CreatorId) == 255 then
-			StaffRole = "Group Owner"
-		end
-		
-		if StaffRole then
-			Player:Kick(`The player '{CheckPlayer.Name}' was detected to be a staff member, their role is '{StaffRole}'.\n\nIf you believe this is false, contact Vexrya.`)
-		end
+		Player:Kick(`The player '{CheckPlayer.Name}' was detected to be a staff member, their role is '{StaffRole}'.\n\nIf you believe this is false, contact the dev of FrostByte.`)
 	end
 	
 	Tab:CreateToggle({
@@ -395,6 +418,73 @@ function CreateUniversalTabs()
 	})
 	
 	HandleConnection(Players.PlayerAdded:Connect(CheckIfStaff), "StaffJoin")
+	
+	getgenv().Role = GetStaffRole(Player)
+	
+	Tab:CreateSection("UI")
+	
+	local CustomThemes = {
+		BlackHistoryMonth = {
+			TextColor = Color3.fromRGB(),
+
+			Background = Color3.fromRGB(),
+			Topbar = Color3.fromRGB(),
+			Shadow = Color3.fromRGB(),
+
+			NotificationBackground = Color3.fromRGB(),
+			NotificationActionsBackground = Color3.fromRGB(),
+
+			TabBackground = Color3.fromRGB(),
+			TabStroke = Color3.fromRGB(),
+			TabBackgroundSelected = Color3.fromRGB(),
+			TabTextColor = Color3.fromRGB(),
+			SelectedTabTextColor = Color3.fromRGB(),
+
+			ElementBackground = Color3.fromRGB(),
+			ElementBackgroundHover = Color3.fromRGB(),
+			SecondaryElementBackground = Color3.fromRGB(),
+			ElementStroke = Color3.fromRGB(),
+			SecondaryElementStroke = Color3.fromRGB(),
+
+			SliderBackground = Color3.fromRGB(),
+			SliderProgress = Color3.fromRGB(),
+			SliderStroke = Color3.fromRGB(),
+
+			ToggleBackground = Color3.fromRGB(),
+			ToggleEnabled = Color3.fromRGB(),
+			ToggleDisabled = Color3.fromRGB(),
+			ToggleEnabledStroke = Color3.fromRGB(),
+			ToggleDisabledStroke = Color3.fromRGB(),
+			ToggleEnabledOuterStroke = Color3.fromRGB(),
+			ToggleDisabledOuterStroke = Color3.fromRGB(),
+
+			DropdownSelected = Color3.fromRGB(),
+			DropdownUnselected = Color3.fromRGB(),
+
+			InputBackground = Color3.fromRGB(),
+			InputStroke = Color3.fromRGB(),
+			PlaceholderColor = Color3.fromRGB()
+		},
+		Default = "DarkBlue",
+		Dark = "Default"
+	}
+	
+	Tab:CreateDropdown({
+		Name = "🖼 • Change Theme",
+		Options = {"BlackHistoryMonth", "Default", "Dark", "AmberGlow", "Amethyst", "Ocean", "Light", "Bloom", "Green", "Serenity"},
+		MultipleOptions = false,
+		Flag = "Theme",
+		Callback = function(CurrentOption)
+			CurrentOption = CurrentOption[1]
+
+			if CurrentOption == "" then
+				return
+			end
+			
+			Window.ModifyTheme(CustomThemes[CurrentOption] or CurrentOption)
+		end,
+	})
+
 
 	Tab:CreateSection("Development")
 
@@ -417,7 +507,11 @@ function CreateUniversalTabs()
 	
 	Notify("Welcome to Vex?", `Loaded in {math.floor((tick() - StartLoadTime) * 10) / 10}s`, "loader-circle")
 	
-	getgenv().FrostByteStarted()
+	local FrostByteStarted = getgenv().FrostByteStarted
+	
+	if FrostByteStarted then
+		FrostByteStarted()
+	end
 end
 
 getgenv().CreateUniversalTabs = CreateUniversalTabs
